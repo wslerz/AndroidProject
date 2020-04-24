@@ -3,6 +3,7 @@ package com.wslerz.baselibrary.mvvm.http
 import android.util.Log
 import com.google.gson.JsonParseException
 import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -36,7 +37,6 @@ object ExceptionConverter {
                             HttpConstant.NO_LOGIN_ERROR_MSG,
                             Throwable(HttpConstant.CODE_NO_LOGIN.toString())
                         )
-
                     else ->
                         Exception(
                             HttpConstant.SERVER_ERROR_MSG,
@@ -70,5 +70,19 @@ object ExceptionConverter {
                     Throwable(HttpConstant.DATA_ERROR_CODE.toString())
                 )
         }
+    }
+
+    val list = listOf<(JSONObject) -> JSONObject>()
+
+    /**
+     * 用来预处理数据  防止后台返回空数据导致的解析错误
+     */
+    @JvmStatic
+    fun handleEmptyData(originalBody: JSONObject): JSONObject {
+        var data = originalBody
+        for (function in list) {
+            data = function.invoke(data)
+        }
+        return data
     }
 }

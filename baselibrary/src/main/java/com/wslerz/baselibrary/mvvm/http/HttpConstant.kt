@@ -1,11 +1,14 @@
 package com.wslerz.baselibrary.mvvm.http
 
+import org.json.JSONObject
+
 /**
  * @author by lzz
  * @date 2019/12/4
  * @description
  */
 object HttpConstant {
+
     //http默认状态码
     const val UNAUTHORIZED = 401
     const val FORBIDDEN = 403
@@ -20,6 +23,7 @@ object HttpConstant {
      * 默认成功返回SUCCESS
      */
     const val CODE_SUCCESS = 200
+
     /**
      * 未登录
      */

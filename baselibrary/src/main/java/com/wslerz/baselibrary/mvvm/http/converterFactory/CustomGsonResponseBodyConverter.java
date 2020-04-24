@@ -20,6 +20,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
+import com.wslerz.baselibrary.mvvm.http.ExceptionConverter;
 import com.wslerz.baselibrary.mvvm.http.HttpConstant;
 import com.wslerz.baselibrary.util.LogUtils;
 
@@ -45,21 +46,10 @@ final class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody
     public T convert(ResponseBody value) throws IOException {
         try {
             String originalBody = value.string();
-
-            // 解密
-            // 获取json中的code，对json进行预处理
             JSONObject json = new JSONObject(originalBody);
-            int code = json.optInt("code");
-            // 当code不为CODE_SUCCESS时，设置data为{}，这样转化就不会出错了
-            if (code != HttpConstant.CODE_SUCCESS) {
-                if (json.has("data")) {
-                    json.remove("data");
-                }
-                originalBody = json.toString();
-            }
+            originalBody = ExceptionConverter.handleEmptyData(json).toString();
             return adapter.fromJson(originalBody);
         } catch (JSONException e) {
-//            LogUtils.Companion.getInstance().i("end e = " + e);
             throw new RuntimeException(e.getMessage());
         } finally {
             value.close();
