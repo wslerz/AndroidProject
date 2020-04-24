@@ -64,11 +64,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    repositories  {
+        flatDir{ dirs 'libs'  }
+    }
+
+    
     //设置资源的前缀  防止布局 style等重复
     resourcePrefix "main_"
 
 // To inline the bytecode built with JVM target 1.8 into
 // bytecode that is being built with JVM target 1.6. (e.g. navArgs)
+
+
 
 
     kotlinOptions {

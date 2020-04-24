@@ -25,5 +25,6 @@ abstract class BaseLinearLayout(
         view = LayoutInflater.from(mContext).inflate(layoutResId, this, true)
         initView(attributeSet)
     }
+
     abstract fun initView(attributeSet: AttributeSet?)
 }

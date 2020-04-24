@@ -1,7 +1,5 @@
 package com.wslerz.baselibrary.mvvm.http
 
-import java.lang.Exception
-
 /**
  *
  * @author by lzz

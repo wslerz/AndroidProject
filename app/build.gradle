@@ -125,11 +125,17 @@ android {
         }
     }
 
+    repositories  {
+        flatDir{ dirs 'libs'  }
+    }
+
+
     resourcePrefix "app_"
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation project(path: ':common_lib')
 
     if (!isMainModule.toBoolean()) {

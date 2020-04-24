@@ -12,7 +12,7 @@ import com.wslerz.baselibrary.util.IApplicationDelegate
  * @date 2020/4/16
  * @description
  */
-object RouterManager : IRouterManager, ICenterProvider, IHomeProvider {
+object RouterManager :IRouterManager,  ICenterProvider, IHomeProvider {
 
     private val iCenterProvider: ICenterProvider? by lazy {
         ARouter.getInstance().build(RouterPath.ROUTER_PATH_TO_CENTER_SERVICE)

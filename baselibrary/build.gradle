@@ -29,6 +29,13 @@ android {
 
 }
 
+// 打包源码jar
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     def ext = rootProject.extensions.getByName("ext")

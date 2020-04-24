@@ -14,6 +14,7 @@ class SoftKeyBoardListener
     (activity: Activity) {
     //activity的根视图
     private var rootView: View? = null
+
     //纪录根视图的显示高度
     private var rootViewVisibleHeight = 0
 

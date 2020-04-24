@@ -64,6 +64,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    repositories  {
+        flatDir{ dirs 'libs'  }
+    }
+
+
     //设置资源的前缀  防止布局 style等重复
     resourcePrefix "home_"
 

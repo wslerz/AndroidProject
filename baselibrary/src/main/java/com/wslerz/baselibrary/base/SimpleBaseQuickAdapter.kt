@@ -10,7 +10,10 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
  * @date 2020/2/21
  * @description
  */
-abstract class SimpleBaseQuickAdapter<T>(@LayoutRes layoutResId: Int, list: MutableList<T>? = null) :
+abstract class SimpleBaseQuickAdapter<T>(
+    @LayoutRes layoutResId: Int,
+    list: MutableList<T>? = null
+) :
     BaseQuickAdapter<T, BaseViewHolder>(layoutResId, list) {
 //    override fun convert(helper: BaseViewHolder, item: T?) {
 //        item ?: return

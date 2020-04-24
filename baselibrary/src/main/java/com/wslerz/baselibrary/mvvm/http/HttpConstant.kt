@@ -1,7 +1,5 @@
 package com.wslerz.baselibrary.mvvm.http
 
-import org.json.JSONObject
-
 /**
  * @author by lzz
  * @date 2019/12/4
@@ -18,6 +16,7 @@ object HttpConstant {
     const val BAD_GATEWAY = 502
     const val SERVICE_UNAVAILABLE = 503
     const val GATEWAY_TIMEOUT = 504
+
     /**
      * 默认成功返回SUCCESS
      */

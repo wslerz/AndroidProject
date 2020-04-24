@@ -20,8 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    repositories  {
+        flatDir{ dirs 'libs'  }
+    }
+
 }
 
 dependencies {
-    implementation project(path: ':baselibrary')
 }

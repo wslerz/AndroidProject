@@ -13,7 +13,7 @@ import java.util.*
  * @date 2020/3/12
  * @description  碎片管理类
  */
-class FragmentUtil(private val containerId:Int) {
+class FragmentUtil(private val containerId: Int) {
     private val fragmentEntityList = ArrayList<FragmentEntity>()
     private var currentFragment: androidx.fragment.app.Fragment? = null
 

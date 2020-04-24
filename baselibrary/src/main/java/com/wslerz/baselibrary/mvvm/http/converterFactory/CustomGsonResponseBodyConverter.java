@@ -16,19 +16,13 @@
 package com.wslerz.baselibrary.mvvm.http.converterFactory;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
 import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.wslerz.baselibrary.mvvm.http.ExceptionConverter;
-import com.wslerz.baselibrary.mvvm.http.HttpConstant;
-import com.wslerz.baselibrary.util.LogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;

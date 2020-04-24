@@ -24,10 +24,23 @@ android {
         }
     }
 
+
 }
 
+
+
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api project(path: ':baselibrary')
+    api fileTree(dir: 'libs', include: ['*.jar','*.aar'])
     api project(path: ':common_res')
+
+    def ext = rootProject.extensions.getByName("ext")
+    api ext.supportLibs
+    api ext.mvvmLibs
+    api ext.retrofitLibs
+    api ext.otherLibs
+
+    testImplementation rootProject.ext.testDependencies["junit"]
+    androidTestImplementation rootProject.ext.testDependencies["testextjunit"]
+    androidTestImplementation rootProject.ext.testDependencies["testespresso"]
+
 }

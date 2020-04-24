@@ -18,7 +18,7 @@ object AppUtils {
      * @param pid 进程号
      * @return 进程名
      */
-     fun getProcessName(pid: Int): String? {
+    fun getProcessName(pid: Int): String? {
         var reader: BufferedReader? = null
         try {
             reader = BufferedReader(FileReader("/proc/$pid/cmdline"))
