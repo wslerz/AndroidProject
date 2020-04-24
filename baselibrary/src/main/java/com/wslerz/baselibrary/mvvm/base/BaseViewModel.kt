@@ -18,7 +18,6 @@ import kotlinx.coroutines.withContext
  */
 open class BaseViewModel : ViewModel() {
     val mExceptionLiveData = MutableLiveData<Throwable>()
-    val mLoginException = MutableLiveData<Throwable>()
 
     /**
      * 通过协程处理请求和 处理失败成功的回调
@@ -30,30 +29,34 @@ open class BaseViewModel : ViewModel() {
         successBlock: (suspend CoroutineScope.(T) -> Unit)? = null,
         errorBlock: (suspend CoroutineScope.(Exception) -> Unit)? = null
     ) {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(Dispatchers.Main) {
             val result = withContext(Dispatchers.IO) {
                 responseBlock()
             }
-            withContext(Dispatchers.Main) {
-                when (result) {
-                    is BaseResult.Success<T> -> {
-                        successBlock?.let {
-                            it(result.data)
-                        }
+            when (result) {
+                is BaseResult.Success<T> -> {
+                    successBlock?.let {
+                        it(result.data)
                     }
-                    is BaseResult.Error -> {
-                        errorBlock?.let {
-                            val cause = result.exception.cause
-                            if (cause != null && cause.message == HttpConstant.CODE_NO_LOGIN.toString()) {
-                                mLoginException.value = result.exception
-                            } else {
-                                it(result.exception)
-                            }
+                }
+                is BaseResult.Error -> {
+                    errorBlock?.let {
+                        val cause = result.exception.cause
+                        val isHandle = handleCode(cause)
+                        if (!isHandle) {
+                            it(result.exception)
                         }
                     }
                 }
             }
         }
+    }
+
+    /**
+     * 是否自定义处理特定的异常   需要的话可以重写  返回true
+     */
+    private fun handleCode(cause: Throwable?): Boolean {
+        return false
     }
 
     /**

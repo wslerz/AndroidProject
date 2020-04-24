@@ -34,8 +34,8 @@ object ExceptionConverter {
                         )
                     HttpConstant.UNAUTHORIZED ->
                         Exception(
-                            HttpConstant.NO_LOGIN_ERROR_MSG,
-                            Throwable(HttpConstant.CODE_NO_LOGIN.toString())
+                            e.message,
+                            Throwable(e.code().toString())
                         )
                     else ->
                         Exception(

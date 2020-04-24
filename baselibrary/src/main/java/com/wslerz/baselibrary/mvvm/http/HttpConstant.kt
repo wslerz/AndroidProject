@@ -18,16 +18,10 @@ object HttpConstant {
     const val BAD_GATEWAY = 502
     const val SERVICE_UNAVAILABLE = 503
     const val GATEWAY_TIMEOUT = 504
-
     /**
      * 默认成功返回SUCCESS
      */
     const val CODE_SUCCESS = 200
-
-    /**
-     * 未登录
-     */
-    const val CODE_NO_LOGIN = UNAUTHORIZED
 
 
     //自定义网络请求状态码
@@ -37,5 +31,4 @@ object HttpConstant {
     const val NET_ERROR_MSG = "网络请求失败，请检查您的网络设置"
     const val SERVER_ERROR_MSG = "服务器异常，请稍后再试"
     const val DEFAULT_ERROR_MSG = "数据请求失败，请稍后再试"
-    const val NO_LOGIN_ERROR_MSG = "暂未登录或登录已经过期"
 }
