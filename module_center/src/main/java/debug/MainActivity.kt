@@ -2,7 +2,7 @@ package debug
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.wslerz.androidproject.R
+import com.wslerz.androidproject.center.R
 
 class MainActivity : AppCompatActivity() {
 

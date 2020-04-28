@@ -1,6 +1,5 @@
 package com.wslerz.androidproject.center
 
-import com.wslerz.androidproject.R
 import com.wslerz.baselibrary.mvvm.base.BaseVMTabFragment
 import org.koin.android.ext.android.get
 

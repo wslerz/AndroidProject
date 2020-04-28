@@ -30,8 +30,10 @@ android {
 
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+//    api fileTree(dir: 'libs', include: ['*.jar','*.aar'])
     api project(path: ':common_res')
+
+    api project(path: ':baselibrary')
 
     def ext = rootProject.extensions.getByName("ext")
     api ext.supportLibs

@@ -11,7 +11,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 //ARouter 集成开发模式下才提供服务
-if (isCenterModule.toBoolean()) {
+if (!isCenterModule.toBoolean()) {
     kapt {
         arguments {
             arg("AROUTER_MODULE_NAME", project.getName())
@@ -79,7 +79,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':common_lib')
     //ARouter 集成开发模式下才提供服务
-    if (isCenterModule.toBoolean()) {
+    if (!isCenterModule.toBoolean()) {
         kapt "com.alibaba:arouter-compiler:${rootProject.ext.dependVersion.arouterCompilerVersion}"
     }
 }

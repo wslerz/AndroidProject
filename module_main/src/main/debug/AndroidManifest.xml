@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.wslerz.androidproject">
+    package="com.wslerz.androidproject.main">
     <application
         android:name="debug.MainApplication"
         android:icon="@mipmap/ic_launcher"
