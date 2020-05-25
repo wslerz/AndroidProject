@@ -1,7 +1,6 @@
 package com.wslerz.baselibrary.util
 
 import android.util.Log
-import com.wslerz.baselibrary.BuildConfig
 
 /**
  *
@@ -10,11 +9,28 @@ import com.wslerz.baselibrary.BuildConfig
  * @description
  */
 object LogUtils {
-    private val isDebug = BuildConfig.DEBUG
+    private var isDebug = false
+    private var TAG = "LogUtils"
+
+    fun setTag(tag: String): LogUtils {
+        TAG = tag
+        return this
+    }
+
+    fun isDebug(isDebug: Boolean): LogUtils {
+        this.isDebug = isDebug
+        return this
+    }
+
+    fun time(log: String) {
+        if (isDebug) {
+            Log.i(TAG, "$log : ${System.currentTimeMillis()}")
+        }
+    }
 
     fun i(log: String) {
         if (isDebug) {
-            Log.i("lzz", log)
+            Log.i(TAG, log)
         }
     }
 

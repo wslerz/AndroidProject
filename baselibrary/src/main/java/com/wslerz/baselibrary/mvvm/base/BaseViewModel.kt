@@ -19,19 +19,25 @@ open class BaseViewModel : ViewModel() {
     val mExceptionLiveData = MutableLiveData<Throwable>()
 
     /**
-     * 通过协程处理请求和 处理失败成功的回调
-     *  失败中的暂未登录或token已经过期自己处理
+     *  处理请求  处理失败成功的回调
+     *  @param responseBlock  请求
+     *  @param successBlock 成功的回调
+     *  @param errorBlock 失败的回调
+     *  @param responseState true开始请求 false 请求结束
      */
     @JvmOverloads
     protected fun <T : Any> launchBlock(
         responseBlock: suspend CoroutineScope.() -> BaseResult<T>,
         successBlock: (suspend CoroutineScope.(T) -> Unit)? = null,
-        errorBlock: (suspend CoroutineScope.(Exception) -> Unit)? = null
+        errorBlock: (suspend CoroutineScope.(Exception) -> Unit)? = null,
+        responseState: ((Boolean) -> Unit)? = null
     ) {
         viewModelScope.launch(Dispatchers.Main) {
+            responseState?.invoke(true)
             val result = withContext(Dispatchers.IO) {
                 responseBlock()
             }
+            responseState?.invoke(false)
             when (result) {
                 is BaseResult.Success<T> -> {
                     successBlock?.let {
@@ -51,10 +57,11 @@ open class BaseViewModel : ViewModel() {
         }
     }
 
+
     /**
      * 是否自定义处理特定的异常   需要的话可以重写  返回true
      */
-    private fun handleCode(cause: Throwable?): Boolean {
+    protected open fun handleCode(cause: Throwable?): Boolean {
         return false
     }
 
@@ -65,12 +72,13 @@ open class BaseViewModel : ViewModel() {
     protected fun <T : Any> launchSucBlock(
         responseBlock: suspend CoroutineScope.() -> BaseResult<T>,
         successBlock: (suspend CoroutineScope.(T) -> Unit)? = null,
-        errorBlock: MutableLiveData<Throwable> = mExceptionLiveData
+        errorBlock: MutableLiveData<Throwable> = mExceptionLiveData,
+        responseState: ((Boolean) -> Unit)? = null
     ) {
         launchBlock(
             responseBlock, successBlock, {
                 errorBlock.value = it
-            }
+            }, responseState
         )
     }
 
@@ -81,14 +89,15 @@ open class BaseViewModel : ViewModel() {
     protected fun <T : Any> launchBlock(
         responseBlock: (suspend CoroutineScope.() -> BaseResult<T>),
         successBlock: MutableLiveData<T>?,
-        errorBlock: MutableLiveData<Throwable>? = mExceptionLiveData
+        errorBlock: MutableLiveData<Throwable>? = mExceptionLiveData,
+        responseState: ((Boolean) -> Unit)? = null
     ) {
         launchBlock(
             responseBlock, {
                 successBlock?.value = it
             }, {
                 errorBlock?.value = it
-            }
+            }, responseState
         )
     }
 

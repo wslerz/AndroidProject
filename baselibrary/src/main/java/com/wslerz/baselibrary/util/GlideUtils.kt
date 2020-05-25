@@ -16,81 +16,79 @@ import com.bumptech.glide.request.RequestOptions
 object GlideUtils {
     @JvmStatic
     fun load(
-        context: Context?,
+        context: Context,
         url: String?,
-        iv: ImageView?
+        iv: ImageView
     ) {
-        Glide.with(context!!)
+        Glide.with(context)
             .load(url)
             .thumbnail(0.1f)
             .centerCrop()
-            .into(iv!!)
+            .into(iv)
     }
 
     @JvmStatic
     fun loadRound(
-        context: Context?,
+        context: Context,
         url: String?,
         roundingRadius: Int,
-        iv: ImageView?
+        iv: ImageView
     ) {
         val roundedCorners = RoundedCorners(roundingRadius);
         val options = RequestOptions.bitmapTransform(roundedCorners).override(0, 0)
-        Glide.with(context!!)
+        Glide.with(context)
             .load(url)
             .apply(options)
             .thumbnail(0.1f)
             .centerCrop()
-            .into(iv!!)
+            .into(iv)
     }
 
 
     @JvmStatic
     fun load(
-        context: Context?,
+        context: Context,
         url: String?,
         def: Int,
-        iv: ImageView?
+        iv: ImageView
     ) {
-        Glide.with(context!!)
+        Glide.with(context)
             .load(url)
             .thumbnail(0.1f)
             .placeholder(def)
             .error(def)
             .centerCrop()
-            .into(iv!!)
+            .into(iv)
     }
 
     @JvmStatic
     fun loadCircle(
-        context: Context?,
+        context: Context,
         url: String?,
-        iv: ImageView?
+        iv: ImageView
     ) {
-        Glide.with(context!!)
+        Glide.with(context)
             .load(url)
             .circleCrop()
             .thumbnail(0.1f)
-            .centerCrop()
-            .into(iv!!)
+            .into(iv)
     }
 
     /**
      * @param def user_head_default 用户   hamal_head_default
      */
     fun loadCircle(
-        context: Context?,
+        context: Context,
         url: String?,
         def: Int,
-        iv: ImageView?
+        iv: ImageView
     ) {
-        Glide.with(context!!)
+        Glide.with(context)
             .load(url)
             .placeholder(def)
             .error(def)
             .circleCrop()
             .thumbnail(0.1f)
-            .centerCrop()
-            .into(iv!!)
+            .into(iv)
     }
 }

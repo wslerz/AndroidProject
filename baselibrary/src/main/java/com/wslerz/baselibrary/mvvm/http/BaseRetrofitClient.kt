@@ -1,6 +1,5 @@
 package com.wslerz.baselibrary.mvvm.http
 
-import com.wslerz.baselibrary.BuildConfig
 import com.wslerz.baselibrary.mvvm.http.converterFactory.CustomGsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -10,13 +9,12 @@ import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLSession
 
 /**
- * Created by luyao
- * on 2018/3/13 14:58
+ * BaseRetrofitClient
  */
 abstract class BaseRetrofitClient {
 
     companion object {
-        private const val TIME_OUT = 5L
+        private const val TIME_OUT = 60L
     }
 
     private val client: OkHttpClient
@@ -40,17 +38,23 @@ abstract class BaseRetrofitClient {
                 .build()
         }
 
-    protected abstract fun handleBuilder(builder: OkHttpClient.Builder)
+    protected open fun handleBuilder(builder: OkHttpClient.Builder) {}
+
 
     private fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val logging = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) {
+        if (isDebug()) {
             logging.level = HttpLoggingInterceptor.Level.BODY
         } else {
-            logging.level = HttpLoggingInterceptor.Level.BASIC
+            logging.level = HttpLoggingInterceptor.Level.NONE
         }
         return logging
     }
+
+    /**
+     * 当前是否处于debug模式  true 显示详细的log 否则不显示log
+     */
+    protected open fun isDebug() = false
 
     fun <S> getService(serviceClass: Class<S>, baseUrl: String): S {
         return Retrofit.Builder()
