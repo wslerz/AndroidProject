@@ -25,12 +25,7 @@ abstract class BaseRetrofitClient {
                 .addInterceptor(getHttpLoggingInterceptor())
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
             handleBuilder(builder)
-            HttpsUtils.createSSLSocketFactory()?.let {
-                builder.sslSocketFactory(it, HttpsUtils.TrustAllManager())
-            }
-            return builder.hostnameVerifier(HostnameVerifier { _: String, _: SSLSession ->
-                return@HostnameVerifier true
-            })
+            return builder
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS)

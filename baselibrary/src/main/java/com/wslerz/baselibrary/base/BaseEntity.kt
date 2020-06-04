@@ -7,4 +7,4 @@ import java.io.Serializable
  * @date 2019/12/4
  * @description
  */
-open interface BaseEntity : Serializable
+interface BaseEntity : Serializable

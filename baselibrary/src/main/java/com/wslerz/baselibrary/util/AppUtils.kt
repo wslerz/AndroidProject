@@ -11,31 +11,29 @@ import java.io.IOException
  * @date 2020/4/15
  * @description
  */
-object AppUtils {
-    /**
-     * 获取进程号对应的进程名
-     *
-     * @param pid 进程号
-     * @return 进程名
-     */
-    fun getProcessName(pid: Int): String? {
-        var reader: BufferedReader? = null
-        try {
-            reader = BufferedReader(FileReader("/proc/$pid/cmdline"))
-            var processName: String = reader.readLine()
-            if (!TextUtils.isEmpty(processName)) {
-                processName = processName.trim { it <= ' ' }
-            }
-            return processName
-        } catch (throwable: Throwable) {
-            throwable.printStackTrace()
-        } finally {
-            try {
-                reader?.close()
-            } catch (exception: IOException) {
-                exception.printStackTrace()
-            }
+/**
+ * 获取进程号对应的进程名
+ *
+ * @param pid 进程号
+ * @return 进程名
+ */
+fun getProcessName(pid: Int): String? {
+    var reader: BufferedReader? = null
+    try {
+        reader = BufferedReader(FileReader("/proc/$pid/cmdline"))
+        var processName: String = reader.readLine()
+        if (!TextUtils.isEmpty(processName)) {
+            processName = processName.trim { it <= ' ' }
         }
-        return null
+        return processName
+    } catch (throwable: Throwable) {
+        throwable.printStackTrace()
+    } finally {
+        try {
+            reader?.close()
+        } catch (exception: IOException) {
+            exception.printStackTrace()
+        }
     }
+    return null
 }

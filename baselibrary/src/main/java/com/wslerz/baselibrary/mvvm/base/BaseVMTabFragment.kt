@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.wslerz.baselibrary.util.ToastUtils
+import com.wslerz.baselibrary.ext.showToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -58,7 +58,7 @@ abstract class BaseVMTabFragment<VM : BaseViewModel> : SimpleImmersionFragment()
 
     protected open fun startExceptionObserve() {
         mViewModel.mExceptionLiveData.observe(this, Observer {
-            ToastUtils.show(mContext, it.message ?: "")
+            mContext.showToast(it.message ?: "")
         })
     }
 

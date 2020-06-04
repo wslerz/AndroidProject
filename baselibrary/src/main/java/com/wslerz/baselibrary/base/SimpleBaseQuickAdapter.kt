@@ -15,15 +15,10 @@ abstract class SimpleBaseQuickAdapter<T>(
     list: MutableList<T>? = null
 ) :
     BaseQuickAdapter<T, BaseViewHolder>(layoutResId, list) {
-//    override fun convert(helper: BaseViewHolder, item: T?) {
-//        item ?: return
-//        convertData(helper, item)
-//    }
-
-    abstract fun convertData(helper: BaseViewHolder, item: T)
-    override fun convert(helper: BaseViewHolder, item: T) {
+    abstract fun convertData(holder: BaseViewHolder, item: T)
+    override fun convert(holder: BaseViewHolder, item: T) {
         item ?: return
-        convertData(helper, item)
+        convertData(holder, item)
     }
 }
 

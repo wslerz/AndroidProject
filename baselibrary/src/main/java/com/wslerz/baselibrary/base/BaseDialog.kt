@@ -12,28 +12,37 @@ import com.wslerz.baselibrary.R
  * @date 2019/12/8
  * @description Dialog基类
  */
-abstract class BaseDialog(mContext: Context) :
-    Dialog(mContext) {
+abstract class BaseDialog(
+    mContext: Context,
+    private val layoutId: Int,
+    private val width: Int = WindowManager.LayoutParams.MATCH_PARENT,
+    private val height: Int = WindowManager.LayoutParams.WRAP_CONTENT,
+    private val gravity: Int = Gravity.BOTTOM
+) : Dialog(mContext) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(getLayoutId())
+        setContentView(layoutId)
         initWindow()
         initView()
     }
 
-    protected abstract fun initView()
+    abstract fun initView()
 
     protected fun setGravity(gravity: Int) {
         val window = this.window
         window?.setGravity(gravity)
     }
 
-    protected fun setWidth(width: Int) {
+    protected fun setLayoutParams(
+        width: Int = WindowManager.LayoutParams.MATCH_PARENT,
+        height: Int = WindowManager.LayoutParams.WRAP_CONTENT
+    ) {
         val window = this.window
         window?.run {
             val params = attributes
             params.width = width //宽度设置为屏幕
+            params.height = height
             attributes = params
         }
     }
@@ -44,14 +53,13 @@ abstract class BaseDialog(mContext: Context) :
         val window = this.window
         window?.run {
             val params = attributes
-            params.width = WindowManager.LayoutParams.MATCH_PARENT //宽度设置为屏幕
-            params.height = WindowManager.LayoutParams.WRAP_CONTENT
+            params.width = width
+            params.height = height
             attributes = params
-            setGravity(Gravity.BOTTOM)
+            setGravity(gravity)
             setBackgroundDrawable(context.resources.getDrawable(R.color.base_transparent, null))
         }
     }
 
-    protected abstract fun getLayoutId(): Int
 
 }

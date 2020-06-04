@@ -23,7 +23,6 @@ import android.view.accessibility.AccessibilityManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
-import com.wslerz.baselibrary.util.ToastUtils
 
 /**
  *
@@ -33,7 +32,7 @@ import com.wslerz.baselibrary.util.ToastUtils
  */
 fun Context.showToast(msg: String?) {
     msg?.run {
-        ToastUtils.show(this@showToast, this)
+       com.wslerz.baselibrary.util.showToast(this@showToast, this)
     }
 
 }
